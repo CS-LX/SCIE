@@ -1,3 +1,4 @@
+using System;
 using Engine;
 using GameEntitySystem;
 using TemplatesDatabase;
@@ -14,7 +15,7 @@ namespace Game
 			componentBody.IsGravityEnabled = false;
 			componentBody.IsGroundDragEnabled = false;
 			Quaternion rotation = componentBody.Rotation;
-			float num = MathUtils.Atan2(2f * rotation.Y * rotation.W - 2f * rotation.X * rotation.Z, 1f - 2f * rotation.Y * rotation.Y - 2f * rotation.Z * rotation.Z);
+			float num = (float)Math.Atan2(2f * rotation.Y * rotation.W - 2f * rotation.X * rotation.Z, 1f - 2f * rotation.Y * rotation.Y - 2f * rotation.Z * rotation.Z);
 			if ((m_turnSpeed += 2.5f * Utils.SubsystemTime.GameTimeDelta * (TurnOrder - m_turnSpeed)) != 0)
 				num -= m_turnSpeed * dt;
 			componentBody.Rotation = Quaternion.CreateFromAxisAngle(Vector3.UnitY, num);
@@ -22,7 +23,7 @@ namespace Game
 			if (MoveOrder != 0f)
 			{
 				if (rider != null)
-					componentBody.Velocity += dt * (componentEngine != null ? componentEngine.HeatLevel * 0.01f : 3f) * MoveOrder * rider.ComponentCreature.ComponentCreatureModel.EyeRotation.ToForwardVector();
+					componentBody.Velocity += dt * (componentEngine != null ? componentEngine.HeatLevel * 0.01f : 3f) * MoveOrder * rider.ComponentCreature.ComponentCreatureModel.EyeRotation.GetForwardVector();
 				MoveOrder = 0f;
 			}
 			if (componentBody.ImmersionFactor > 0.95f)

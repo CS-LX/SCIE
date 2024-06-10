@@ -1,4 +1,5 @@
-﻿using Engine;
+﻿using System;
+using Engine;
 using Engine.Graphics;
 using System.Collections.Generic;
 
@@ -18,7 +19,7 @@ namespace Game
 		}
 
 
-		public override void GenerateTerrainVertices(BlockGeometryGenerator generator, TerrainGeometrySubsets geometry, int value, int x, int y, int z)
+		public override void GenerateTerrainVertices(BlockGeometryGenerator generator, TerrainGeometry geometry, int value, int x, int y, int z)
 		{
 			generator.GenerateCubeVertices(this, value, x, y, z, SubsystemPalette.GetColor(generator, GetPaintColor(value)), geometry.OpaqueSubsetsByFace);
 		}
@@ -131,7 +132,7 @@ namespace Game
 	{
 		public override BlockPlacementData GetPlacementValue(SubsystemTerrain subsystemTerrain, ComponentMiner componentMiner, int value, TerrainRaycastResult raycastResult)
 		{
-			Vector3 forward = componentMiner.ComponentCreature.ComponentCreatureModel.EyeRotation.ToForwardVector();
+			Vector3 forward = componentMiner.ComponentCreature.ComponentCreatureModel.EyeRotation.GetForwardVector();
 			float num = Vector3.Dot(forward, Vector3.UnitZ);
 			float num2 = Vector3.Dot(forward, Vector3.UnitX);
 			float num3 = Vector3.Dot(forward, -Vector3.UnitZ);
@@ -190,7 +191,7 @@ namespace Game
 				var connection = Connections[i];
 				if (connection.ConnectorType != ElectricConnectorType.Output && connection.NeighborConnectorType != 0)
 				{
-					n = MathUtils.Max(n, (int)MathUtils.Round(connection.NeighborElectricElement.GetOutputVoltage(connection.NeighborConnectorFace) * 15f));
+					n = MathUtils.Max(n, (int)MathF.Round(connection.NeighborElectricElement.GetOutputVoltage(connection.NeighborConnectorFace) * 15f));
 					if (n > 7) break;
 				}
 			}

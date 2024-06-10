@@ -24,7 +24,7 @@ namespace Game
 		public CastMachWidget(IInventory inventory, ComponentCastMach componentFurnace)
 		{
 			m_componentFurnace = componentFurnace;
-			WidgetsManager.LoadWidgetContents(this, this, ContentManager.Get<XElement>("Widgets/CastMachWidget"));
+            LoadContents( this, ContentManager.Get<XElement>("Widgets/CastMachWidget"));
 			m_inventoryGrid = Children.Find<GridPanelWidget>("InventoryGrid");
 			m_furnaceGrid = Children.Find<GridPanelWidget>("FurnaceGrid");
 			m_fire = Children.Find<FireWidget>("Fire");

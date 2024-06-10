@@ -110,12 +110,27 @@ namespace Game
 		public static string Get(string s) => s != null && TR.TryGetValue(s, out string result) ? result : s;
 		public static Stream GetTargetFile(string name, bool throwIfNotFound = true)
 		{
-			for (var enumerator = ModsManager.GetEntries(Storage.GetExtension(name)).GetEnumerator(); enumerator.MoveNext();)
+            foreach (string c in Storage.ListFileNames(ModsManager.ModsPath))
+            {
+                if (c.EndsWith(Storage.GetExtension(name))) {
+                    if(string.Equals(c, name, StringComparison.OrdinalIgnoreCase))
+                    {
+                        return Storage.OpenFile(Storage.CombinePaths(ModsManager.ModsPath, c), OpenFileMode.Read);
+                    }
+                }
+            }
+            if (throwIfNotFound)
+                throw new InvalidOperationException(name + " not found.");
+            return null;
+#if false
+      			for (var enumerator = ModsManager.GetEntries(Storage.GetExtension(name)).GetEnumerator(); enumerator.MoveNext();)
 				if (string.Equals(Path.GetFileName(enumerator.Current.Filename), name, StringComparison.OrdinalIgnoreCase))
 					return enumerator.Current.Stream;
 			if (throwIfNotFound)
 				throw new InvalidOperationException(name + " not found.");
 			return null;
+#endif
+
 		}
 		[MethodImpl((MethodImplOptions)0x100)]
 		public static string ToStr(this Materials m)

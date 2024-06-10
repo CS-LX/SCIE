@@ -101,7 +101,7 @@ namespace Game
 		public override void Load(ValuesDictionary valuesDictionary, IdToEntityMap idToEntityMap)
 		{
 			this.LoadItems(valuesDictionary);
-			   m_craftingGridSize = (int)MathUtils.Sqrt((double)(SlotsCount - 2));
+			   m_craftingGridSize = (int)Math.Sqrt((double)(SlotsCount - 2));
 			if (m_craftingGridSize < 1 || m_craftingGridSize > 6)
 				throw new InvalidOperationException("Invalid crafting grid size.");
 			m_matchedIngredients = new string[36];
@@ -127,7 +127,7 @@ namespace Game
 						m_matchedIngredients[num2] = null;
 				}
 			}
-			var craftingRecipe = CraftingRecipesManager.FindMatchingRecipe(Utils.SubsystemTerrain, m_matchedIngredients, 0f);
+			var craftingRecipe = CraftingRecipesManager.FindMatchingRecipe(Utils.SubsystemTerrain, m_matchedIngredients, 0f, 0f);
 			if (craftingRecipe != null)
 			{
 				m_matchedRecipe = craftingRecipe;

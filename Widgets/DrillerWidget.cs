@@ -28,7 +28,7 @@ namespace Game
 			m_componentDispenser = componentDispenser;
 			m_componentBlockEntity = componentDispenser.Entity.FindComponent<ComponentBlockEntity>(true);
 			m_subsystemTerrain = componentDispenser.Project.FindSubsystem<SubsystemTerrain>(true);
-			WidgetsManager.LoadWidgetContents(this, this, ContentManager.Get<XElement>("Widgets/DrillerWidget"));
+            LoadContents( this, ContentManager.Get<XElement>("Widgets/DrillerWidget"));
 			m_inventoryGrid = Children.Find<GridPanelWidget>("InventoryGrid");
 			m_dispenserGrid = Children.Find<GridPanelWidget>("DispenserGrid");
 			m_dispenseButton = Children.Find<ButtonWidget>("DispenseButton");

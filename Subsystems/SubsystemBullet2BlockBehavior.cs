@@ -18,9 +18,9 @@ namespace Game
 				{
 					const float num = 1f;
 					const float minDistance = 8f;
-					if (Utils.Random.UniformFloat(0f, 1f) < num)
+					if (Utils.Random.Float(0f, 1f) < num)
 					{
-						Utils.SubsystemAudio.PlayRandomSound("Audio/Ricochets", 1f, Utils.Random.UniformFloat(-0.2f, 0.2f), new Vector3(value.X, value.Y, value.Z), minDistance, true);
+						Utils.SubsystemAudio.PlayRandomSound("Audio/Ricochets", 1f, Utils.Random.Float(-0.2f, 0.2f), new Vector3(value.X, value.Y, value.Z), minDistance, true);
 						return false;
 					}
 				}

@@ -47,7 +47,7 @@ namespace Game
 			var vector2 = new Vector3(point) + new Vector3(0.5f) + 0.6f * vector;
 			if (mode != 0)
 			{
-				if (Utils.SubsystemProjectiles.FireProjectile(value, vector2, 1f * m_random.UniformFloat(39f, 41f) * (vector + m_random.Vector3(0.025f, false) + new Vector3(0f, 0.05f, 0f)), Vector3.Zero, null) != null)
+				if (Utils.SubsystemProjectiles.FireProjectile(value, vector2, 1f * m_random.Float(39f, 41f) * (vector + m_random.Vector3(0.025f, 1f) + new Vector3(0f, 0.05f, 0f)), Vector3.Zero, null) != null)
 					Utils.SubsystemAudio.PlaySound("Audio/DispenserShoot", 1f, 0f, vector2, 4f, true);
 				else
 					DispenseItem(point, face, value, MachineMode.Dispense);

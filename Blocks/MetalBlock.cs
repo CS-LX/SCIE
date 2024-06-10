@@ -31,9 +31,9 @@ namespace Game
 		public const int Index = 510;
 		public static readonly string[] Names = new[]
 		{
-			"»ù´¡»úÆ÷Íâ¿Ç",
-			"¸ß¼¶»úÆ÷Íâ¿Ç",
-			"·À»ğ×©Ç½"
+			"åŸºç¡€æœºå™¨å¤–å£³",
+			"é«˜çº§æœºå™¨å¤–å£³",
+			"é˜²ç«ç –å¢™"
 		};
 		public static readonly Color[] Colors = new[]
 		{
@@ -63,7 +63,7 @@ namespace Game
 		{
 			return new BlockPlacementData { Value = value, CellFace = raycastResult.CellFace };
 		}
-		public override void GenerateTerrainVertices(BlockGeometryGenerator generator, TerrainGeometrySubsets geometry, int value, int x, int y, int z)
+		public override void GenerateTerrainVertices(BlockGeometryGenerator generator, TerrainGeometry geometry, int value, int x, int y, int z)
 		{
 			int type = GetType(value);
 			generator.GenerateCubeVertices(this, value, x, y, z, (type < 3 ? Colors[type] : GetColor((Materials)(type - 3))) * SubsystemPalette.GetColor(generator, GetPaintColor(value)), geometry.OpaqueSubsetsByFace);
@@ -100,14 +100,14 @@ namespace Game
 		{
 			switch (GetType(value))
 			{
-				case 0: return Utils.Get("Ò»Ğ©»úÆ÷µÄ»ù´¡Íâ¿Ç¡£ ·Ç³£ÖØÇÒÄÍÓÃ¡£¶Ô ÍÚ¾òºÍ±¬Õ¨¶¼·Ç³£ÓĞ¿¹ĞÔ¡£ ¿ÉÒÔÓÃ¶à¸öÌú°å»ò¸Ö¶§ÖÆ³É¡£");
-				case 1: return Utils.Get("Ä³Ğ©»úÆ÷»òÉè±¸µÄ¸ß¼¶Íâ¿Ç¡£ ·Ç³£ÖØÇÒÄÍÓÃ¡£ ¶ÔÍÚ¾òºÍ±¬Õ¨¶¼ÓĞ·Ç³£ÓĞ¿¹ĞÔ¡£ ¿ÉÒÔÓÃ¶à¸ö¸Ö°åÖÆ×÷¡£");
-				case 2: return Utils.Get("·À»ğ×©Ç½¿ÉÒÔÍ¨¹ı½«¼¸¿é·À»ğ×©×éºÏÔÚÒ»Æğ²¢ÓÃÉ°½¬Õ³ºÏ¶øÖÆ³É¡£ ËüÊÇÒ»ÖÖ¶à¹¦ÄÜ£¬¼á¹ÌÇÒÃÀ¹ÛµÄ¹¤Òµ²ÄÁÏ¡£");
+				case 0: return Utils.Get("ä¸€äº›æœºå™¨çš„åŸºç¡€å¤–å£³ã€‚ éå¸¸é‡ä¸”è€ç”¨ã€‚å¯¹ æŒ–æ˜å’Œçˆ†ç‚¸éƒ½éå¸¸æœ‰æŠ—æ€§ã€‚ å¯ä»¥ç”¨å¤šä¸ªé“æ¿æˆ–é’¢é”­åˆ¶æˆã€‚");
+				case 1: return Utils.Get("æŸäº›æœºå™¨æˆ–è®¾å¤‡çš„é«˜çº§å¤–å£³ã€‚ éå¸¸é‡ä¸”è€ç”¨ã€‚ å¯¹æŒ–æ˜å’Œçˆ†ç‚¸éƒ½æœ‰éå¸¸æœ‰æŠ—æ€§ã€‚ å¯ä»¥ç”¨å¤šä¸ªé’¢æ¿åˆ¶ä½œã€‚");
+				case 2: return Utils.Get("é˜²ç«ç –å¢™å¯ä»¥é€šè¿‡å°†å‡ å—é˜²ç«ç –ç»„åˆåœ¨ä¸€èµ·å¹¶ç”¨ç ‚æµ†ç²˜åˆè€Œåˆ¶æˆã€‚ å®ƒæ˜¯ä¸€ç§å¤šåŠŸèƒ½ï¼Œåšå›ºä¸”ç¾è§‚çš„å·¥ä¸šææ–™ã€‚");
 				default:
 					var type = (Materials)(GetType(value) - 3);
 					return Utils.Get(type == Materials.Steel
-						? "¸Ö¿é¡£ ·Ç³£ÖØÇÒÄÍÓÃ¡£ ¶ÔÍÚ¾òºÍ±¬Õ¨¶¼ÓĞ·Ç³£ºÃµÄ¿¹ĞÔ¡£ ¿ÉÒÔÓÃ¶à¸ö¸Ö¶§ÖÆ×÷¡£"
-						: Utils.Get("Ò»¿é´¿") + type.ToStr() + Utils.Get("ÄÜÓÉ¶à¿é") + type.ToStr() + Utils.Get("¶§ÖÆµÃ¡£"));
+						? "é’¢å—ã€‚ éå¸¸é‡ä¸”è€ç”¨ã€‚ å¯¹æŒ–æ˜å’Œçˆ†ç‚¸éƒ½æœ‰éå¸¸å¥½çš„æŠ—æ€§ã€‚ å¯ä»¥ç”¨å¤šä¸ªé’¢é”­åˆ¶ä½œã€‚"
+						: Utils.Get("ä¸€å—çº¯") + type.ToStr() + Utils.Get("èƒ½ç”±å¤šå—") + type.ToStr() + Utils.Get("é”­åˆ¶å¾—ã€‚"));
 			}
 		}
 		public override void GetDropValues(SubsystemTerrain subsystemTerrain, int oldValue, int newValue, int toolLevel, List<BlockDropValue> dropValues, out bool showDebris)

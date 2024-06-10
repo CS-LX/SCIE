@@ -57,7 +57,7 @@ namespace Game
 		{
 			return 1;
 		}
-		public override void GenerateTerrainVertices(Block block, BlockGeometryGenerator generator, TerrainGeometrySubsets geometry, int value, int x, int y, int z)
+		public override void GenerateTerrainVertices(Block block, BlockGeometryGenerator generator, TerrainGeometry geometry, int value, int x, int y, int z)
 		{
 			GenerateWireVertices(generator, value, x, y, z, 4, 0f, Vector2.Zero, geometry.SubsetOpaque);
 		}
@@ -175,7 +175,7 @@ namespace Game
 						BlockGeometryGenerator.SetupVertex(vector10.X, vector10.Y, vector10.Z, color10, vector16.X, vector16.Y, ref array[count + 5]);
 						int count2 = subset.Indices.Count;
 						subset.Indices.Count += (connectorDirection == ElectricConnectorDirection.In) ? 15 : 12;
-						ushort[] array2 = subset.Indices.Array;
+						int[] array2 = subset.Indices.Array;
 						array2[count2] = (ushort)count;
 						array2[count2 + 1] = (ushort)(count + 5);
 						array2[count2 + 2] = (ushort)(count + 1);
@@ -230,7 +230,7 @@ namespace Game
 						BlockGeometryGenerator.SetupVertex(vector20.X, vector20.Y, vector20.Z, color12, vector23.X, vector23.Y, ref array3[count3 + 2]);
 						int count4 = subset.Indices.Count;
 						subset.Indices.Count += 3;
-						ushort[] array4 = subset.Indices.Array;
+						int[] array4 = subset.Indices.Array;
 						array4[count4] = (ushort)count3;
 						array4[count4 + 1] = (ushort)(count3 + 2);
 						array4[count4 + 2] = (ushort)(count3 + 1);

@@ -19,7 +19,7 @@ namespace Game
 		{
 			m_inventory = inventory;
 			m_slotIndex = slotIndex;
-			WidgetsManager.LoadWidgetContents(this, this, ContentManager.Get<XElement>("Widgets/Musket2Widget"));
+            LoadContents(this, ContentManager.Get<XElement>("Widgets/Musket2Widget"));
 			m_inventoryGrid = Children.Find<GridPanelWidget>("InventoryGrid");
 			m_inventorySlotWidget = Children.Find<InventorySlotWidget>("InventorySlot");
 			m_instructionsLabel = Children.Find<LabelWidget>("InstructionsLabel");

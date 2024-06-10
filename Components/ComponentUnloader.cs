@@ -36,7 +36,7 @@ namespace Game
 				if (!Place(position + vector, face, slotValue) && DispenseItem)
 				{
 					Vector3 vector2 = position + 0.6f * vector;
-					Utils.SubsystemPickables.AddPickable(slotValue, 1, vector2, 1.8f * (vector + m_random.Vector3(0.2f, false)), null);
+					Utils.SubsystemPickables.AddPickable(slotValue, 1, vector2, 1.8f * (vector + m_random.Vector3(0f, 0.2f)), null);
 					Utils.SubsystemAudio.PlaySound("Audio/DispenserDispense", 1f, 0f, new Vector3(vector2.X, vector2.Y, vector2.Z), 3f, true);
 				}
 			}

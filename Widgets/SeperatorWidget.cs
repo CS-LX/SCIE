@@ -26,7 +26,7 @@ namespace Game
 		public SeperatorWidget(IInventory inventory, ComponentMachine componentFurnace, string path = "Widgets/SeperatorWidget")
 		{
 			m_componentFurnace = componentFurnace;
-			WidgetsManager.LoadWidgetContents(this, this, ContentManager.Get<XElement>(path));
+            LoadContents( this, ContentManager.Get<XElement>(path));
 			m_inventoryGrid = Children.Find<GridPanelWidget>("InventoryGrid");
 			m_furnaceGrid = Children.Find<GridPanelWidget>("FurnaceGrid");
 			m_result1 = Children.Find<InventorySlotWidget>("ResultSlot1");

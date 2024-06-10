@@ -104,7 +104,7 @@ namespace Game
 			}
 			return device;
 		}
-		public override void GenerateTerrainVertices(Block block, BlockGeometryGenerator generator, TerrainGeometrySubsets geometry, int value, int x, int y, int z)
+		public override void GenerateTerrainVertices(Block block, BlockGeometryGenerator generator, TerrainGeometry geometry, int value, int x, int y, int z)
 		{
 			generator.GenerateCubeVertices(ItemBlock, value, x, y, z, Color.LightGray * SubsystemPalette.GetColor(generator, PaintableItemBlock.GetColor(Terrain.ExtractData(value))), geometry.OpaqueSubsetsByFace);
 		}

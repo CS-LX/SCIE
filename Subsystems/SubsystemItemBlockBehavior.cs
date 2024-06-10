@@ -8,25 +8,26 @@ namespace Game
 	{
 		public override int[] HandledBlocks => new int[] { 90, GunpowderBlock.Index, RottenMeatBlock.Index, ItemBlock.Index };
 
-		public override bool OnAim(Vector3 start, Vector3 direction, ComponentMiner componentMiner, AimState state)
+
+        public override bool OnAim(Ray3 aim, ComponentMiner componentMiner, AimState state)
 		{
 			int value = componentMiner.ActiveBlockValue;
 			if (!(BlocksManager.Blocks[Terrain.ExtractContents(value)] is ItemBlock block))
 				return false;
 			var item = block.GetItem(ref value);
-			return (item is OreChunk || (item is Mould && !(item is Mine)) || value == ItemBlock.IdTable["RefractoryBrick"] || value == ItemBlock.IdTable["ScrapIron"]) && base.OnAim(start, direction, componentMiner, state);
+			return (item is OreChunk || (item is Mould && !(item is Mine)) || value == ItemBlock.IdTable["RefractoryBrick"] || value == ItemBlock.IdTable["ScrapIron"]) && base.OnAim(aim, componentMiner, state);
 		}
 
-		public override bool OnUse(Vector3 start, Vector3 direction, ComponentMiner componentMiner)
+		public override bool OnUse(Ray3 use, ComponentMiner componentMiner)
 		{
 			int activeBlockValue = componentMiner.ActiveBlockValue;
-			var result = componentMiner.PickTerrainForDigging(start, direction);
+			var result = componentMiner.Raycast<TerrainRaycastResult>(use, RaycastMode.Digging);
 			Entity entity;
 			Vector3 position;
 			BodyRaycastResult? body;
 			if (activeBlockValue == ItemBlock.IdTable["Wrench"])
 			{
-				body = componentMiner.PickBody(start, direction);
+				body = componentMiner.Raycast<BodyRaycastResult>(use, RaycastMode.Interaction);
 				Matrix matrix = componentMiner.ComponentCreature.ComponentBody.Matrix;
 				position = matrix.Translation + 1f * matrix.Forward + Vector3.UnitY;
 				if (body.HasValue && (!result.HasValue || body.Value.Distance < result.Value.Distance))
@@ -47,7 +48,7 @@ namespace Game
 				position = new Vector3(result.Value.CellFace.Point) + new Vector3(0.5f);
 				entity = DatabaseManager.CreateEntity(Project, activeBlockValue == ItemBlock.IdTable["Minecart"] ? "Carriage" : "Train", true);
 
-				var rotation = componentMiner.ComponentCreature.ComponentCreatureModel.EyeRotation.ToForwardVector();
+				var rotation = componentMiner.ComponentCreature.ComponentCreatureModel.EyeRotation.GetForwardVector();
 				entity.FindComponent<ComponentTrain>(true).SetDirection(RailBlock.IsDirectionX(RailBlock.GetRailType(Terrain.ExtractData(result.Value.Value)))
 					? rotation.Z < 0 ? 0 : 2
 					: rotation.X < 0 ? 1 : 3);
@@ -88,22 +89,22 @@ namespace Game
 			}*/
 			else if (activeBlockValue == ItemBlock.IdTable["基因查看器"])
 			{
-				body = componentMiner.PickBody(start, direction);
+				body = componentMiner.Raycast<BodyRaycastResult>(use, RaycastMode.Interaction);
 				if (body.HasValue && (!result.HasValue || body.Value.Distance < result.Value.Distance))
 				{
 					var cv = body.Value.ComponentBody.Entity.FindComponent<ComponentVariant>();
 					if (cv != null)
-						DialogsManager.ShowDialog(componentMiner.ComponentPlayer?.View.GameWidget, new MessageDialog("Result", cv.Genome.ToString(), "OK", null, null));
+						DialogsManager.ShowDialog(componentMiner.ComponentPlayer?.GameWidget, new MessageDialog("Result", cv.Genome.ToString(), "OK", null, null));
 					return true;
 				}
 			}
 			else if (result.HasValue)
 			{
-				position = result.Value.RaycastStart + Vector3.Normalize(result.Value.RaycastEnd - result.Value.RaycastStart) * result.Value.Distance;
+				position = result.Value.Ray.Position + Vector3.Normalize(result.Value.Ray.Direction - result.Value.Ray.Position) * result.Value.Distance;
 				if (activeBlockValue == ItemBlock.IdTable["SteamBoat"])
 				{
 					entity = DatabaseManager.CreateEntity(Project, "SteamBoat", true);
-					entity.FindComponent<ComponentFrame>(true).Rotation = Quaternion.CreateFromAxisAngle(Vector3.UnitY, m_random.UniformFloat(0f, 6.283185f));
+					entity.FindComponent<ComponentFrame>(true).Rotation = Quaternion.CreateFromAxisAngle(Vector3.UnitY, m_random.Float(0f, 6.283185f));
 					goto put;
 				}
 				/*else if (activeBlockValue == ItemBlock.IdTable["Minecart"])
@@ -120,7 +121,7 @@ namespace Game
 				else if (activeBlockValue == ItemBlock.IdTable["Airship"])
 				{
 					entity = DatabaseManager.CreateEntity(Project, "Airship", true);
-					entity.FindComponent<ComponentFrame>(true).Rotation = Quaternion.CreateFromAxisAngle(Vector3.UnitY, m_random.UniformFloat(0f, 6.283185f));
+					entity.FindComponent<ComponentFrame>(true).Rotation = Quaternion.CreateFromAxisAngle(Vector3.UnitY, m_random.Float(0f, 6.283185f));
 					goto put;
 				}
 				else if (BlocksManager.Blocks[Terrain.ExtractContents(activeBlockValue)] is ItemBlock itemblock && itemblock.GetItem(ref activeBlockValue) is Mine mine)
@@ -129,7 +130,7 @@ namespace Game
 					{
 						{ "Mine", new ValuesDictionary { { "Type", mine.MineType } } }
 					}, true);
-					entity.FindComponent<ComponentFrame>(true).Rotation = Quaternion.CreateFromAxisAngle(Vector3.UnitY, m_random.UniformFloat(0f, 6.283185f));
+					entity.FindComponent<ComponentFrame>(true).Rotation = Quaternion.CreateFromAxisAngle(Vector3.UnitY, m_random.Float(0f, 6.283185f));
 					var componentMine = entity.FindComponent<ComponentMine>(true);
 					componentMine.ExplosionPressure = mine.ExplosionPressure;
 					componentMine.Delay = mine.Delay;
@@ -140,7 +141,7 @@ namespace Game
 			TerrainRaycastResult? result2;
 			if (Terrain.ExtractContents(activeBlockValue) == 90)
 			{
-				result2 = componentMiner.PickTerrainForGathering(start, direction);
+				result2 = componentMiner.Raycast<TerrainRaycastResult>(use, RaycastMode.Gathering);
 				if (result2.HasValue)
 				{
 					CellFace cellFace = result2.Value.CellFace;
@@ -156,7 +157,7 @@ namespace Game
 			}
 			if (activeBlockValue == (RottenMeatBlock.Index | 2 << 4 << 14))
 			{
-				result2 = componentMiner.PickTerrainForInteraction(start, direction);
+				result2 = componentMiner.Raycast<TerrainRaycastResult>(use, RaycastMode.Interaction);
 				if (result2.HasValue && componentMiner.Place(result2.Value, RottenMeatBlock.Index | 1 << 4 << 14))
 				{
 					inventory.RemoveSlotItems(inventory.ActiveSlotIndex, 1);

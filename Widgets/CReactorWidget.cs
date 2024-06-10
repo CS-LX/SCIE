@@ -26,7 +26,7 @@ namespace Game
 		public CReactorWidget(IInventory inventory, ComponentMachine componentFurnace)
 		{
 			m_componentFurnace = componentFurnace;
-			WidgetsManager.LoadWidgetContents(this, this, ContentManager.Get<XElement>("Widgets/CReactorWidget"));
+            LoadContents( this, ContentManager.Get<XElement>("Widgets/CReactorWidget"));
 			m_inventoryGrid = Children.Find<GridPanelWidget>("InventoryGrid");
 			m_furnaceGrid = Children.Find<GridPanelWidget>("FurnaceGrid");
 			m_result1 = Children.Find<InventorySlotWidget>("ResultSlot1");

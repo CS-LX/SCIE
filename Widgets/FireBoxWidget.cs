@@ -24,7 +24,7 @@ namespace Game
 		public FireBoxWidget(IInventory inventory, T component, string path)
 		{
 			m_componentFurnace = component;
-			WidgetsManager.LoadWidgetContents(this, this, ContentManager.Get<XElement>(path));
+            LoadContents( this, ContentManager.Get<XElement>(path));
 			m_inventoryGrid = Children.Find<GridPanelWidget>("InventoryGrid");
 			m_fire = Children.Find<FireWidget>("Fire");
 			m_progress = Children.Find<ValueBarWidget>("Progress");

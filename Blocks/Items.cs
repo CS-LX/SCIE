@@ -12,7 +12,7 @@ namespace Game
 		{
 			if (Task == null)
 				Task = Task.Run((Action)Load);
-			TexturedMeshItem.WhiteTexture = new Texture2D(1, 1, false, ColorFormat.Rgba8888);
+			TexturedMeshItem.WhiteTexture = new Texture2D(1, 1, 1, ColorFormat.Rgba8888);
 			TexturedMeshItem.WhiteTexture.SetData(0, new byte[] { 255, 255, 255, 255 });
 			var stream = Utils.GetTargetFile("IndustrialMod.png");
 			try

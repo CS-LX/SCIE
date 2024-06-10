@@ -76,7 +76,7 @@ namespace Game
 		{
 			return (Terrain.ExtractData(value) & 32768) != 0 ? 10f : base.GetExplosionPressure(value);
 		}
-		public override void GenerateTerrainVertices(BlockGeometryGenerator generator, TerrainGeometrySubsets geometry, int value, int x, int y, int z)
+		public override void GenerateTerrainVertices(BlockGeometryGenerator generator, TerrainGeometry geometry, int value, int x, int y, int z)
 		{
 			generator.GenerateCubeVertices(this, value, x, y, z, IsColored(Terrain.ExtractData(value) & 16383) ? SubsystemPalette.GetColor(generator, GetColor(Terrain.ExtractData(value))) : Color.White, geometry.OpaqueSubsetsByFace);
 		}

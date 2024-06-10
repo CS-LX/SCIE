@@ -141,7 +141,7 @@ namespace Game
 			list.Add(new PurePowder("Na₃P"));
 			//list.Add(new Cylinder("B₂H₆"));
 			list.Add(new Cylinder("C₂H₄"));
-			list.Capacity = list.m_count;
+			list.Capacity = list.Count;
 			Items = list.Array;
 		}
 		/*public override CraftingRecipe GetAdHocCraftingRecipe(SubsystemTerrain subsystemTerrain, string[] ingredients, float heatLevel)

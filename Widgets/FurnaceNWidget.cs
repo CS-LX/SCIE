@@ -24,7 +24,7 @@ namespace Game
 		public FurnaceNWidget(IInventory inventory, ComponentFurnaceN componentFurnace)
 		{
 			m_componentFurnace = componentFurnace;
-			WidgetsManager.LoadWidgetContents(this, this, ContentManager.Get<XElement>("Widgets/FurnaceNWidget"));
+            LoadContents(this, ContentManager.Get<XElement>("Widgets/FurnaceNWidget"));
 			m_inventoryGrid = Children.Find<GridPanelWidget>("InventoryGrid");
 			m_furnaceGrid = Children.Find<GridPanelWidget>("FurnaceGrid");
 			m_fire = Children.Find<FireWidget>("Fire");

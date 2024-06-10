@@ -86,7 +86,7 @@ namespace Game
 		bool ShouldGenerateFace(SubsystemTerrain subsystemTerrain, int face, int value, int neighborValue);
 		int GetShadowStrength(int value);
 		string GetSoundMaterialName(SubsystemTerrain subsystemTerrain, int value);
-		void GenerateTerrainVertices(Block block, BlockGeometryGenerator generator, TerrainGeometrySubsets geometry, int value, int x, int y, int z);
+		void GenerateTerrainVertices(Block block, BlockGeometryGenerator generator, TerrainGeometry geometry, int value, int x, int y, int z);
 		BlockPlacementData GetPlacementValue(SubsystemTerrain subsystemTerrain, ComponentMiner componentMiner, int value, TerrainRaycastResult raycastResult);
 		BlockPlacementData GetDigValue(SubsystemTerrain subsystemTerrain, ComponentMiner componentMiner, int value, int toolValue, TerrainRaycastResult raycastResult);
 		void GetDropValues(SubsystemTerrain subsystemTerrain, int oldValue, int newValue, int toolLevel, List<BlockDropValue> dropValues, out bool showDebris);

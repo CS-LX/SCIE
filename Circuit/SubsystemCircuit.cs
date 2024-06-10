@@ -24,7 +24,7 @@ namespace Game
 		public Element[][] CircuitPath;
 		public static Dictionary<Point3, Device> Table;
 		public override int[] HandledBlocks => new int[] { ElementBlock.Index };
-		public int UpdateOrder => 0;
+		public UpdateOrder UpdateOrder => 0;
 		public override void Load(ValuesDictionary valuesDictionary)
 		{
 			CircuitPath = new Element[0][];

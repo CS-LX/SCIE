@@ -18,7 +18,7 @@ namespace Game
 		public MachineToolWidget(IInventory inventory, ComponentLargeCraftingTable componentCraftingTable)
 		{
 			m_componentCraftingTable = componentCraftingTable;
-			WidgetsManager.LoadWidgetContents(this, this, ContentManager.Get<XElement>("Widgets/MachineToolWidget"));
+            LoadContents( this, ContentManager.Get<XElement>("Widgets/MachineToolWidget"));
 			m_inventoryGrid = Children.Find<GridPanelWidget>("InventoryGrid");
 			m_craftingGrid = Children.Find<GridPanelWidget>("CraftingGrid");
 			m_craftingResultSlot = Children.Find<InventorySlotWidget>("CraftingResultSlot");

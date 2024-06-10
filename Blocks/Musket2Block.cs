@@ -1,3 +1,4 @@
+using System;
 using Engine;
 using Engine.Graphics;
 
@@ -60,7 +61,7 @@ namespace Game
 
 		public override int SetDamage(int value, int damage)
 		{
-			return Terrain.ReplaceData(value, (Terrain.ExtractData(value) & -65281) | (MathUtils.Clamp(damage, 0, 255) << 8));
+			return Terrain.ReplaceData(value, (Terrain.ExtractData(value) & -65281) | (Math.Clamp(damage, 0, 255) << 8));
 		}
 
 		public static LoadState GetLoadState(int data)

@@ -48,7 +48,7 @@ namespace Game
 			}
 		}
 
-		public int UpdateOrder => 0;
+		public UpdateOrder UpdateOrder => 0;
 
 		public override void Load(ValuesDictionary valuesDictionary, IdToEntityMap idToEntityMap)
 		{
@@ -85,7 +85,7 @@ namespace Game
 				health.Injure(amount / health.AttackResilience, null, false, "Train");
 			else
 				body.Entity.FindComponent<ComponentDamage>()?.Damage(amount);
-			body.ApplyImpulse(MathUtils.Clamp(1.25f * 6f * MathUtils.Pow(m_componentBody.Mass / body.Mass, 0.33f), 0f, 6f) * Vector3.Normalize(body.Position - m_componentBody.Position));
+			body.ApplyImpulse(Math.Clamp(1.25f * 6f * (float)Math.Pow(m_componentBody.Mass / body.Mass, 0.33f), 0f, 6f) * Vector3.Normalize(body.Position - m_componentBody.Position));
 		}
 
 		public ComponentTrain FindNearestTrain()
@@ -159,11 +159,11 @@ namespace Game
 			{
 				case 0:
 				case 2:
-					m_componentBody.Position = new Vector3(MathUtils.Floor(m_componentBody.Position.X) + 0.5f, m_componentBody.Position.Y, m_componentBody.Position.Z);
+					m_componentBody.Position = new Vector3((float)Math.Floor(m_componentBody.Position.X) + 0.5f, m_componentBody.Position.Y, m_componentBody.Position.Z);
 					break;
 				case 1:
 				case 3:
-					m_componentBody.Position = new Vector3(m_componentBody.Position.X, m_componentBody.Position.Y, MathUtils.Floor(m_componentBody.Position.Z) + 0.5f);
+					m_componentBody.Position = new Vector3(m_componentBody.Position.X, m_componentBody.Position.Y, (float)Math.Floor(m_componentBody.Position.Z) + 0.5f);
 					break;
 			}
 			
@@ -172,7 +172,7 @@ namespace Game
 				var result = Utils.SubsystemTerrain.Raycast(m_componentBody.Position, m_componentBody.Position + new Vector3(0, -3f, 0), false, true, null);
 
 				if (result.HasValue && Terrain.ExtractContents(result.Value.Value) == RailBlock.Index && (dt *= SimulateRail(RailBlock.GetRailType(Terrain.ExtractData(result.Value.Value)))) > 0f)
-					m_componentBody.m_velocity += dt * rotation.ToForwardVector();
+					m_componentBody.m_velocity += dt * rotation.GetForwardVector();
 			}
 			m_componentBody.Rotation = Quaternion.Slerp(m_componentBody.Rotation, rotation, 0.15f);
 		}
@@ -200,14 +200,14 @@ namespace Game
 			if (Direction == turnType)
 			{
 				Direction = (Direction - 1) & 3;
-				m_componentBody.Velocity = MathUtils.Abs(m_componentBody.Velocity.X + m_componentBody.Velocity.Z) * forwardVector;
+				m_componentBody.Velocity = (float)Math.Abs(m_componentBody.Velocity.X + m_componentBody.Velocity.Z) * forwardVector;
 				m_componentBody.Position = Vector3.Floor(m_componentBody.Position) + center;
 				return true;
 			}
 			if (((Direction - 1) & 3) == turnType)
 			{
 				Direction = (Direction + 1) & 3;
-				m_componentBody.Velocity = MathUtils.Abs(m_componentBody.Velocity.X + m_componentBody.Velocity.Z) * forwardVector;
+				m_componentBody.Velocity = (float)Math.Abs(m_componentBody.Velocity.X + m_componentBody.Velocity.Z) * forwardVector;
 				m_componentBody.Position = Vector3.Floor(m_componentBody.Position) + center;
 				return true;
 			}
@@ -216,7 +216,7 @@ namespace Game
 
 		static float GetOffsetOnDirection(Vector3 vec, int direction)
 		{
-			float offset = (direction & 1) == 0 ? vec.Z - MathUtils.Floor(vec.Z) : vec.X - MathUtils.Floor(vec.X);
+			float offset = (direction & 1) == 0 ? vec.Z - (float)Math.Floor(vec.Z) : vec.X - (float)Math.Floor(vec.X);
 			return (direction & 2) == 0 ? 1 - offset : offset;
 		}
 

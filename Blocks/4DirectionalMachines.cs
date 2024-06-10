@@ -87,7 +87,7 @@ namespace Game
 		{
 			return face == GetDirection(value) ? 242 : 39;
 		}
-		public override void GenerateTerrainVertices(BlockGeometryGenerator generator, TerrainGeometrySubsets geometry, int value, int x, int y, int z)
+		public override void GenerateTerrainVertices(BlockGeometryGenerator generator, TerrainGeometry geometry, int value, int x, int y, int z)
 		{
 			generator.GenerateCubeVertices(this, value, x, y, z, new Color(255, 153, 18) * SubsystemPalette.GetColor(generator, GetPaintColor(value)), geometry.OpaqueSubsetsByFace);
 		}
@@ -105,7 +105,7 @@ namespace Game
 		{
 			return face == GetDirection(value) ? 243 : 107;
 		}
-		public override void GenerateTerrainVertices(BlockGeometryGenerator generator, TerrainGeometrySubsets geometry, int value, int x, int y, int z)
+		public override void GenerateTerrainVertices(BlockGeometryGenerator generator, TerrainGeometry geometry, int value, int x, int y, int z)
 		{
 			generator.GenerateCubeVertices(this, value, x, y, z, Color.LightGray * SubsystemPalette.GetColor(generator, GetPaintColor(value)), geometry.OpaqueSubsetsByFace);
 		}
@@ -167,14 +167,14 @@ namespace Game
 		public new const int Index = 532;
 		public static readonly string[] Names = new[]
 		{
-			"ÍË»ðÂ¯",
-			"ÕÖÊ½Â¯",
-			"ÏäÊ½Â¯",
-			"ÃºÆøÂ¯",
-			"´ã»ðÂ¯",
-			"È¼Æø¼ÓÈÈÂ¯",
-			"Õæ¿ÕÂ¯",
-			"²£Á§ÍË»ðÒ¤",
+			"é€€ç«ç‚‰",
+			"ç½©å¼ç‚‰",
+			"ç®±å¼ç‚‰",
+			"ç…¤æ°”ç‚‰",
+			"æ·¬ç«ç‚‰",
+			"ç‡ƒæ°”åŠ çƒ­ç‚‰",
+			"çœŸç©ºç‚‰",
+			"çŽ»ç’ƒé€€ç«çª‘",
 		};
 
 		public override int GetFaceTextureSlot(int face, int value)
@@ -196,7 +196,7 @@ namespace Game
 		{
 			base.DrawBlock(primitivesRenderer, value, Terrain.ExtractData(value) >> 10 != 0 ? color * Color.LightGray : color, size, ref matrix, environmentData);
 		}
-		public override void GenerateTerrainVertices(BlockGeometryGenerator generator, TerrainGeometrySubsets geometry, int value, int x, int y, int z)
+		public override void GenerateTerrainVertices(BlockGeometryGenerator generator, TerrainGeometry geometry, int value, int x, int y, int z)
 		{
 			Color color = SubsystemPalette.GetColor(generator, GetPaintColor(value));
 			generator.GenerateCubeVertices(this, value, x, y, z, Terrain.ExtractData(value) >> 10 != 0 ? color * Color.LightGray : color, geometry.OpaqueSubsetsByFace);
@@ -240,11 +240,11 @@ namespace Game
 		}
 		public override string GetDisplayName(SubsystemTerrain subsystemTerrain, int value)
 		{
-			return Terrain.ExtractData(value) >> 10 != 0 ? Utils.Get("ÕôÆûÂÖ»ú") : DefaultDisplayName;
+			return Terrain.ExtractData(value) >> 10 != 0 ? Utils.Get("è’¸æ±½è½®æœº") : DefaultDisplayName;
 		}
 		public override string GetDescription(int value)
 		{
-			return Terrain.ExtractData(value) >> 10 != 0 ? Utils.Get("ÕôÆûÂÖ»ú") : DefaultDescription;
+			return Terrain.ExtractData(value) >> 10 != 0 ? Utils.Get("è’¸æ±½è½®æœº") : DefaultDescription;
 		}
 	}
 	public class EngineHBlock : EngineBlock
@@ -264,11 +264,11 @@ namespace Game
 		}
 		public override string GetDisplayName(SubsystemTerrain subsystemTerrain, int value)
 		{
-			return (Terrain.ExtractData(value) & 1024) != 0 ? Utils.Get("È¼ÆøÂÖ»ú") : DefaultDisplayName;
+			return (Terrain.ExtractData(value) & 1024) != 0 ? Utils.Get("ç‡ƒæ°”è½®æœº") : DefaultDisplayName;
 		}
 		public override string GetDescription(int value)
 		{
-			return (Terrain.ExtractData(value) & 1024) != 0 ? Utils.Get("È¼ÆøÂÖ»ú") : DefaultDescription;
+			return (Terrain.ExtractData(value) & 1024) != 0 ? Utils.Get("ç‡ƒæ°”è½®æœº") : DefaultDescription;
 		}
 	}
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Engine;
 using Engine.Graphics;
 
@@ -43,7 +44,7 @@ namespace Game
 					Position = new Vector3(0, 0.01f, 0)
 				}
 			};
-			var indices = new ushort[] { 2, 1, 0, 0, 3, 2 };
+			var indices = new int[] { 2, 1, 0, 0, 3, 2 };
 			mesh.Vertices.AddRange(vertices);
 			mesh.Indices.AddRange(indices);
 
@@ -103,7 +104,7 @@ namespace Game
 					Position = new Vector3(0, 1.01f, 0)
 				}
 			};
-			indices = new ushort[] { 2, 1, 0, 0, 1, 2, 0, 3, 2, 2, 3, 0 };
+			indices = new [] { 2, 1, 0, 0, 1, 2, 0, 3, 2, 2, 3, 0 };
 			mesh.Vertices.AddRange(vertices);
 			mesh.Indices.AddRange(indices);
 			mesh.TransformTextureCoordinates(Matrix.CreateTranslation(new Vector3(237 % 16 / 16f, 237 / 16 / 16f, 0f)));
@@ -166,7 +167,7 @@ namespace Game
 			BlocksManager.DrawFlatBlock(primitivesRenderer, value, size, ref matrix, null, color, false, environmentData);
 		}
 
-		public override void GenerateTerrainVertices(BlockGeometryGenerator generator, TerrainGeometrySubsets geometry, int value, int x, int y, int z)
+		public override void GenerateTerrainVertices(BlockGeometryGenerator generator, TerrainGeometry geometry, int value, int x, int y, int z)
 		{
 			generator.GenerateMeshVertices(this, x, y, z, m_blockMeshes[GetRailType(Terrain.ExtractData(value))], Color.White, null, geometry.SubsetAlphaTest);
 		}
@@ -193,11 +194,11 @@ namespace Game
 
 		public override BlockPlacementData GetPlacementValue(SubsystemTerrain subsystemTerrain, ComponentMiner componentMiner, int value, TerrainRaycastResult raycastResult)
 		{
-			Vector3 forward = componentMiner.ComponentCreature.ComponentCreatureModel.EyeRotation.ToForwardVector();
+			Vector3 forward = componentMiner.ComponentCreature.ComponentCreatureModel.EyeRotation.GetForwardVector();
 			return new BlockPlacementData
 			{
 				CellFace = raycastResult.CellFace,
-				Value = Terrain.MakeBlockValue(Index, 0, SetRailType(0, MathUtils.Abs(forward.X) < MathUtils.Abs(forward.Z) ? 4 : 5))
+				Value = Terrain.MakeBlockValue(Index, 0, SetRailType(0, Math.Abs(forward.X) < Math.Abs(forward.Z) ? 4 : 5))
 			};
 		}
 

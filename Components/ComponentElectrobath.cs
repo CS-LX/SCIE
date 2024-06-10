@@ -22,7 +22,7 @@ namespace Game
 
 		public override int FuelSlotIndex => -1;
 
-		public int UpdateOrder => 0;
+		public UpdateOrder UpdateOrder => 0;
 
 		public void Update(float dt)
 		{

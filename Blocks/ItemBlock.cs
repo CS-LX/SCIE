@@ -11,10 +11,10 @@ using Engine.Audio;
 
 namespace Game
 {
-	[PluginLoader("IndustrialMod", "", 0u)]
 	public class Item : IItem
 	{
 		public static ItemBlock ItemBlock;
+        /*
 		static void Initialize()
 		{
 			BlocksManager.DamageItem1 = DamageItem;
@@ -31,29 +31,40 @@ namespace Game
 			var d = new Dictionary<string, string>();
 			Utils.TR = d;
 		}
+		*/
 		public static bool True(object obj) => true;
 		public static void PlaySound(string name, float volume, float pitch, float pan)
 		{
-			if (SettingsManager.SoundsVolume > 0f)
-			{
-				if (volume * SettingsManager.SoundsVolume > AudioManager.MinAudibleVolume)
-					try
-					{
-						object obj = ContentManager.Get(name);
-						if (obj is SoundBuffer buffer)
-							new Sound(buffer, volume * SettingsManager.SoundsVolume, AudioManager.ToEnginePitch(pitch), pan, isLooped: false, disposeOnStop: true).Play();
-						else if (obj is StreamingSource source)
-							new StreamingSound(source, volume, 1f, 0f, false, false, 1f).Play();
-					}
-					catch { }
-			}
+            if (SettingsManager.SoundsVolume > 0f)
+            {
+                float num = volume * SettingsManager.SoundsVolume;
+                float MinAudibleVolume = 0.05f * SettingsManager.SoundsVolume;
+                if (num > MinAudibleVolume)
+                {
+                    try
+                    {
+                        SoundBuffer soundBuffer = ContentManager.Get<SoundBuffer>(name, ".flac", false);
+                        if (soundBuffer == null) soundBuffer = ContentManager.Get<SoundBuffer>(name, ".wav", false);
+                        if (soundBuffer == null) soundBuffer = ContentManager.Get<SoundBuffer>(name, ".ogg", false);
+                        if (soundBuffer == null) soundBuffer = ContentManager.Get<SoundBuffer>(name, ".mp3", true);
+                        Sound sound = new(soundBuffer, num, ToEnginePitch(pitch), pan, isLooped: false, disposeOnStop: true);
+                        sound.Play();
+                    }
+                    catch (Exception)
+                    {
+                    }
+                }
+            }
+            float ToEnginePitch(float pitch)
+            {
+                return MathF.Pow(2f, pitch);
+            }
 		}
 		public static Block[] FindBlocksByCraftingId(string craftingId)
 		{
 			if (ItemBlock.IdTable.TryGetValue(craftingId, out int value))
 				return new[] { BlocksManager.Blocks[ItemBlock.Index] };
-			var c__DisplayClass = new BlocksManager.c__DisplayClass14_0 { craftingId = craftingId };
-			return BlocksManager.Blocks.Where(c__DisplayClass.FindBlocksByCraftingId_b__0).ToArray();
+			return BlocksManager.Blocks.Where(x => x.CraftingId == craftingId).ToArray();
 		}
 		public static int DamageItem(int value, int damageCount)
 		{
@@ -65,11 +76,12 @@ namespace Game
 				? block.SetDamage(value, damageCount)
 				: block.GetDamageDestructionValue(value);
 		}
+        #if false
 		public static void CRInitialize()
 		{
 			CraftingRecipesManager.m_recipes = new List<CraftingRecipe>();
 			var recipes = new List<CraftingRecipe>();
-			var enumerator = ContentManager.CombineXml(ContentManager.Get<XElement>("CraftingRecipes"), ModsManager.GetEntries(".cr"), "Description", "Result", "Recipes").Descendants("Recipe").GetEnumerator();
+			var enumerator = ModsManager.CombineCr(ContentManager.Get<XElement>("CraftingRecipes"), ModsManager.GetEntries(".cr"), "Description", "Result", "Recipes").Descendants("Recipe").GetEnumerator();
 			while (enumerator.MoveNext())
 			{
 				XElement xelement = enumerator.Current;
@@ -166,6 +178,7 @@ namespace Game
 			CraftingRecipesManager.m_recipes.Sort(CraftingRecipesManager.c._.Initialize_b__3_0);
 			CraftingRecipesManager.m_recipes.AddRange(recipes);
 		}
+#endif
 		public static int GetCount(string[] ingredients)
 		{
 			if (ingredients == null || ingredients.Length == 0)
@@ -276,7 +289,7 @@ namespace Game
 		{
 			return string.Empty;
 		}
-		public virtual void GenerateTerrainVertices(Block block, BlockGeometryGenerator generator, TerrainGeometrySubsets geometry, int value, int x, int y, int z)
+		public virtual void GenerateTerrainVertices(Block block, BlockGeometryGenerator generator, TerrainGeometry geometry, int value, int x, int y, int z)
 		{
 			generator.GenerateCubeVertices(ItemBlock, value, x, y, z, Color.White, geometry.OpaqueSubsetsByFace);
 		}
@@ -309,7 +322,7 @@ namespace Game
 		{
 			int num = Terrain.ExtractData(value);
 			num &= 0xF;
-			num |= MathUtils.Clamp(damage, 0, 4095) << 4;
+			num |= Math.Clamp(damage, 0, 4095) << 4;
 			return Terrain.ReplaceData(value, num);
 		}
 		public virtual int GetDamageDestructionValue(int value)
@@ -436,7 +449,7 @@ namespace Game
 		{
 			return GetItem(ref value).GetSoundMaterialName(subsystemTerrain, value);
 		}
-		public override void GenerateTerrainVertices(BlockGeometryGenerator generator, TerrainGeometrySubsets geometry, int value, int x, int y, int z)
+		public override void GenerateTerrainVertices(BlockGeometryGenerator generator, TerrainGeometry geometry, int value, int x, int y, int z)
 		{
 			GetItem(ref value).GenerateTerrainVertices(this, generator, geometry, value, x, y, z);
 		}

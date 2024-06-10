@@ -20,7 +20,7 @@ namespace Game
 		public override int RemainsSlotIndex => SlotsCount - 3;
 		public override int ResultSlotIndex => SlotsCount - 4;
 
-		public int UpdateOrder => 0;
+		public UpdateOrder UpdateOrder => 0;
 
 		public void Update(float dt)
 		{
@@ -217,7 +217,7 @@ namespace Game
 			{
 				if (m_matchedIngredients2[0] >= 7 && (m_matchedIngredients2[2] >= 1 || m_matchedIngredients2[3] >= 1) && m_matchedIngredients2[1] + m_matchedIngredients2[4] + m_matchedIngredients2[5] + m_matchedIngredients2[6] <= 0)
 				{
-					int num2 = m_random.UniformInt(8, 11);
+					int num2 = m_random.Int(8, 11);
 					m_matchedIngredients[9] = num2;
 					m_matchedIngredients[0] = 7;
 					m_matchedIngredients[2] = 1;
@@ -227,7 +227,7 @@ namespace Game
 				}
 				if (m_matchedIngredients2[1] >= 7 && (m_matchedIngredients2[2] >= 1 || m_matchedIngredients2[3] >= 1) && m_matchedIngredients2[0] + m_matchedIngredients2[4] + m_matchedIngredients2[5] + m_matchedIngredients2[6] <= 0)
 				{
-					int num3 = m_random.UniformInt(10, 12);
+					int num3 = m_random.Int(10, 12);
 					m_matchedIngredients[9] = num3;
 					m_matchedIngredients[1] = 7;
 					m_matchedIngredients[2] = 1;
@@ -271,7 +271,7 @@ namespace Game
 				}
 				if (m_matchedIngredients2[6] >= 6 && m_matchedIngredients2[3] >= 2 && m_matchedIngredients2[0] + m_matchedIngredients2[1] + m_matchedIngredients2[2] + m_matchedIngredients2[4] + m_matchedIngredients2[5] <= 0)
 				{
-					int num7 = m_random.UniformInt(2, 4);
+					int num7 = m_random.Int(2, 4);
 					m_matchedIngredients[6] = 6;
 					m_matchedIngredients[3] = 2;
 					m_matchedIngredients[8] = num7;
@@ -280,7 +280,7 @@ namespace Game
 				}
 				if (m_matchedIngredients2[6] >= 5 && m_matchedIngredients2[3] >= 2 && m_matchedIngredients2[5] >= 1 && m_matchedIngredients2[0] + m_matchedIngredients2[1] + m_matchedIngredients2[2] + m_matchedIngredients2[4] <= 0)
 				{
-					int num7 = m_random.UniformInt(3, 5);
+					int num7 = m_random.Int(3, 5);
 					m_matchedIngredients[6] = 6;
 					m_matchedIngredients[3] = 2;
 					m_matchedIngredients[8] = num7;

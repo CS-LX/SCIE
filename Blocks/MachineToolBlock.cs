@@ -1,3 +1,4 @@
+using System;
 using Engine;
 using System.Collections.Generic;
 
@@ -62,7 +63,7 @@ namespace Game
 						if (inventory == null)
 							return false;
 					}
-					int n = (int)MathUtils.Round(connection.NeighborElectricElement.GetOutputVoltage(connection.NeighborConnectorFace) * 15f);
+					int n = (int)MathF.Round(connection.NeighborElectricElement.GetOutputVoltage(connection.NeighborConnectorFace) * 15f);
 					if (connection.CellFace.Face == 4)
 						inventory.SlotIndex = n;
 					else if (n > 0 && (SubsystemElectricity.SubsystemTime.GameTime - m_lastDispenseTime > 0.1) && connection.CellFace.Face == 5)

@@ -165,7 +165,7 @@ namespace Game
 		public double LastTime;
 		public int Period;
 
-		public int UpdateOrder => 0;
+		public UpdateOrder UpdateOrder => 0;
 
 		public static Genome Hybridize(Genome father, Genome mother)
 		{
@@ -321,7 +321,7 @@ namespace Game
 			if (chb != null)
 			{
 				float v = Genome[Trait.HerdingRange];
-				chb.m_herdingRange = MathUtils.Abs(v);
+				chb.m_herdingRange = Math.Abs(v);
 				chb.m_autoNearbyCreaturesHelp = v < 0;
 			}
 			var cl = Entity.FindComponent<ComponentLocomotion>();
@@ -377,7 +377,7 @@ namespace Game
 				cleb.m_layFrequency = Genome[Trait.LayFrequency];
 			var cs = Entity.FindComponent<ComponentShapeshifter>();
 			if (cs != null)
-				cs.IsEnabled = Utils.Random.UniformFloat(0f, 1f) < Genome[Trait.ShapeshifterProbability];
+				cs.IsEnabled = Utils.Random.Float(0f, 1f) < Genome[Trait.ShapeshifterProbability];
 			var cssb = Entity.FindComponent<ComponentStubbornSteedBehavior>();
 			if (cssb != null)
 				cssb.m_stubbornProbability = Genome[Trait.StubbornProbability];
@@ -397,48 +397,48 @@ namespace Game
 				genome = new Genome(OGenome, new float[OGenome.Length]);
 				float f = (float)LastTime / 6000;
 				if (f > 2.5f) goto a;
-				f = 1.5f - MathUtils.Cos(f * f / 2) / 2;
+				f = 1.5f - (float)Math.Cos(f * f / 2) / 2;
 				for (t = Trait.DayChaseRange; t <= Trait.NightChaseTime; t++)
 					if ((Utils.Random.Int() & 1) != 0)
-						genome[t] *= Utils.Random.UniformFloat(1f, f);
+						genome[t] *= Utils.Random.Float(1f, f);
 				for (t = Trait.WalkSpeed; t < Trait.TurnSpeed; t++)
 					if ((Utils.Random.Int() & 1) != 0)
-						genome[t] *= Utils.Random.UniformFloat(1f, f);
+						genome[t] *= Utils.Random.Float(1f, f);
 				for (t = Trait.AttackResilience; t <= Trait.FireResilience; t++)
 					if ((Utils.Random.Int() & 1) != 0)
-						genome[t] *= Utils.Random.UniformFloat(1f, f);
+						genome[t] *= Utils.Random.Float(1f, f);
 				if ((Utils.Random.Int() & 1) != 0)
-					genome[Trait.AttackPower] *= Utils.Random.UniformFloat(1f, f);
+					genome[Trait.AttackPower] *= Utils.Random.Float(1f, f);
 				if ((Utils.Random.Int() & 1) != 0)
-					genome[Trait.FindPlayer_DayRange] *= Utils.Random.UniformFloat(1f, f);
+					genome[Trait.FindPlayer_DayRange] *= Utils.Random.Float(1f, f);
 				else
-					genome[Trait.FindPlayer_NightRange] *= Utils.Random.UniformFloat(1f, f);
+					genome[Trait.FindPlayer_NightRange] *= Utils.Random.Float(1f, f);
 				if ((Utils.Random.Int() & 1) != 0)
-					genome[Trait.DigSpeed] *= Utils.Random.UniformFloat(1f, f);
+					genome[Trait.DigSpeed] *= Utils.Random.Float(1f, f);
 				if ((Utils.Random.Int() & 1) != 0)
-					genome[Trait.AirCapacity] *= Utils.Random.UniformFloat(1f, f);
+					genome[Trait.AirCapacity] *= Utils.Random.Float(1f, f);
 				goto a;
 			}
 			genome = Genome;
 			for (t = Trait.DayChaseRange; t <= Trait.NightChaseTime; t++)
 				if ((Utils.Random.Int() & 1) != 0)
-				genome[t] *= Utils.Random.UniformFloat(1f, 1.1f);
+				genome[t] *= Utils.Random.Float(1f, 1.1f);
 			for (t = Trait.WalkSpeed; t < Trait.TurnSpeed; t++)
 				if ((Utils.Random.Int() & 1) != 0)
-					genome[t] *= Utils.Random.UniformFloat(1f, 1.1f);
+					genome[t] *= Utils.Random.Float(1f, 1.1f);
 			for (t = Trait.AttackResilience; t <= Trait.FireResilience; t++)
 				if ((Utils.Random.Int() & 1) != 0)
-					genome[t] *= Utils.Random.UniformFloat(1f, 1.08f);
+					genome[t] *= Utils.Random.Float(1f, 1.08f);
 			if ((Utils.Random.Int() & 1) != 0)
-				genome[Trait.AttackPower] *= Utils.Random.UniformFloat(1f, 1.1f);
+				genome[Trait.AttackPower] *= Utils.Random.Float(1f, 1.1f);
 			if ((Utils.Random.Int() & 1) != 0)
-				genome[Trait.FindPlayer_DayRange] *= Utils.Random.UniformFloat(1f, 1.08f);
+				genome[Trait.FindPlayer_DayRange] *= Utils.Random.Float(1f, 1.08f);
 			else
-				genome[Trait.FindPlayer_NightRange] *= Utils.Random.UniformFloat(1f, 1.08f);
+				genome[Trait.FindPlayer_NightRange] *= Utils.Random.Float(1f, 1.08f);
 			if ((Utils.Random.Int() & 1) != 0)
-				genome[Trait.DigSpeed] *= Utils.Random.UniformFloat(1f, 1.04f);
+				genome[Trait.DigSpeed] *= Utils.Random.Float(1f, 1.04f);
 			if ((Utils.Random.Int() & 1) != 0)
-				genome[Trait.AirCapacity] *= Utils.Random.UniformFloat(1f, 1.04f);
+				genome[Trait.AirCapacity] *= Utils.Random.Float(1f, 1.04f);
 			a:
 			Genome = genome;
 			OnEntityAdded();

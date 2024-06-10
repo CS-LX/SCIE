@@ -20,7 +20,7 @@ namespace Game
 		public NewChestWidget(IInventory inventory, ComponentInventoryBase component, string text = null)
 		{
 			Component = component;
-			WidgetsManager.LoadWidgetContents(this, this, ContentManager.Get<XElement>("Widgets/NewChestWidget"));
+            LoadContents(this, ContentManager.Get<XElement>("Widgets/NewChestWidget"));
 			if (text != null)
 				Children.Find<LabelWidget>("ChestLabel").Text = text;
 			m_inventoryGrid = Children.Find<GridPanelWidget>("InventoryGrid");

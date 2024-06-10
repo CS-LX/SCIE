@@ -1,3 +1,4 @@
+using System;
 using Engine;
 using Engine.Graphics;
 using System.Collections.Generic;
@@ -38,12 +39,12 @@ namespace Game
 
 		public override string GetDisplayName(SubsystemTerrain subsystemTerrain, int value)
 		{
-			return (Terrain.ExtractData(value) >> 10) != 0 ? Utils.Get("·ÅÖÃ»ú") : DefaultDisplayName;
+			return (Terrain.ExtractData(value) >> 10) != 0 ? Utils.Get("ï¿½ï¿½ï¿½Ã»ï¿½") : DefaultDisplayName;
 		}
 
 		public override string GetDescription(int value)
 		{
-			return (Terrain.ExtractData(value) >> 10) != 0 ? Utils.Get("·ÅÖÃ»ú") : DefaultDescription;
+			return (Terrain.ExtractData(value) >> 10) != 0 ? Utils.Get("ï¿½ï¿½ï¿½Ã»ï¿½") : DefaultDescription;
 		}
 
 		public override string GetCategory(int value)
@@ -98,7 +99,7 @@ namespace Game
 			{
 				var connection = Connections[i];
 				if (connection.ConnectorType != ElectricConnectorType.Output && connection.NeighborConnectorType != 0)
-					n = MathUtils.Max(n, (int)MathUtils.Round(connection.NeighborElectricElement.GetOutputVoltage(connection.NeighborConnectorFace) * 15f));
+					n = MathUtils.Max(n, (int)MathF.Round(connection.NeighborElectricElement.GetOutputVoltage(connection.NeighborConnectorFace) * 15f));
 			}
 			int y = Point.Y;
 			if ((n & 7) != 0 && (n & 7) != 7 && y >= 0 && y < 128)

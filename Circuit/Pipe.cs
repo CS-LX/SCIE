@@ -44,7 +44,7 @@ namespace Game
 			return new BlockPlacementData { Value = Terrain.ReplaceLight(value, 0), CellFace = raycastResult.CellFace };
 		}
 		public override string GetCraftingId() => DefaultDisplayName;
-		public override void GenerateTerrainVertices(Block block, BlockGeometryGenerator generator, TerrainGeometrySubsets geometry, int value, int x, int y, int z)
+		public override void GenerateTerrainVertices(Block block, BlockGeometryGenerator generator, TerrainGeometry geometry, int value, int x, int y, int z)
 		{
 			int data = Terrain.ExtractData(value);
 			generator.GenerateMeshVertices(block, x, y, z, Meshes[GetType(data)], SubsystemPalette.GetColor(generator, PaintableItemBlock.GetColor(data)), null, geometry.SubsetOpaque);

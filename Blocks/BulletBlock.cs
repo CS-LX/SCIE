@@ -29,7 +29,7 @@ namespace Game
 
 		protected static readonly float[] m_explosionPressures = new float[4] { 0f,0f,0f,1f};
 
-		public override void GenerateTerrainVertices(BlockGeometryGenerator generator, TerrainGeometrySubsets geometry, int value, int x, int y, int z)
+		public override void GenerateTerrainVertices(BlockGeometryGenerator generator, TerrainGeometry geometry, int value, int x, int y, int z)
 		{
 		}
 

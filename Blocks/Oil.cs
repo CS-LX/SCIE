@@ -62,7 +62,7 @@ public class RottenMeatBlock : FluidBlock
 				return;
 		}
 	}
-	public override void GenerateTerrainVertices(BlockGeometryGenerator generator, TerrainGeometrySubsets geometry, int value, int x, int y, int z)
+	public override void GenerateTerrainVertices(BlockGeometryGenerator generator, TerrainGeometry geometry, int value, int x, int y, int z)
 	{
 		Type type = GetType(value);
 		if (type < Type.Oil || type > Type.Gasoline || type == Type.OilBucket)

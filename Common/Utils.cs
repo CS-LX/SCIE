@@ -130,7 +130,7 @@ namespace Game
 		}
 		public static int GetDirectionXZ(ComponentMiner componentMiner)
 		{
-			Vector3 forward = componentMiner.ComponentCreature.ComponentCreatureModel.EyeRotation.ToForwardVector();
+			Vector3 forward = componentMiner.ComponentCreature.ComponentCreatureModel.EyeRotation.GetForwardVector();
 			float num = Vector3.Dot(forward, Vector3.UnitZ);
 			float num2 = Vector3.Dot(forward, Vector3.UnitX);
 			float num3 = Vector3.Dot(forward, -Vector3.UnitZ);

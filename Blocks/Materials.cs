@@ -8,7 +8,7 @@ namespace Game
 	{
 		public Screwdriver(Color color, string description = "") : base(description)
 		{
-			DefaultDisplayName = "ÂİË¿µ¶";
+			DefaultDisplayName = "èºä¸åˆ€";
 			m_standaloneBlockMesh.AppendMesh("Models/Screwdriver", "obj1", Matrix.CreateTranslation(0f, -0.33f, 0f), Matrix.CreateTranslation(15f / 16f, 0f, 0f) * Matrix.CreateScale(0.05f), color);
         }
 		public override void DrawBlock(PrimitivesRenderer3D primitivesRenderer, int value, Color color, float size, ref Matrix matrix, DrawBlockEnvironmentData environmentData)
@@ -22,7 +22,7 @@ namespace Game
     {
         public Wrench(Color color, string description = "") : base(description)
 		{
-			DefaultDisplayName = "°âÊÖ";
+			DefaultDisplayName = "æ‰³æ‰‹";
 			m_standaloneBlockMesh.AppendMesh("Models/Wrench", "obj1", Matrix.CreateScale(1.2f), Matrix.CreateTranslation(15f / 16f, 0f, 0f) * Matrix.CreateScale(0.05f), color);
         }
         public override void DrawBlock(PrimitivesRenderer3D primitivesRenderer, int value, Color color, float size, ref Matrix matrix, DrawBlockEnvironmentData environmentData)
@@ -39,7 +39,7 @@ namespace Game
 		{
 			Id = type.ToString() + "Ingot";
 			string name = type.ToStr();
-			DefaultDisplayName = name + Utils.Get("¶§");
+			DefaultDisplayName = name + Utils.Get("é”­");
 			DefaultDescription = "An ingot of pure " + name + ". Can be crafted into very durable and strong " + name + " items. Very important in the industrial era.";
 			m_standaloneBlockMesh.AppendMesh("Models/Ingots", "IronIngot", Matrix.CreateTranslation(0f, -0.1f, 0f), Matrix.Identity, MetalBlock.GetColor(type));
 		}
@@ -57,7 +57,7 @@ namespace Game
 		{
 			Id = type.ToString() + "Line";
 			DefaultTextureSlot = 212;
-			DefaultDescription = (DefaultDisplayName = type.ToStr() + Utils.Get("Ë¿")) + "is made of " + type.ToStr() + " Ingot, it can be used in many place in the industrial era.";
+			DefaultDescription = (DefaultDisplayName = type.ToStr() + Utils.Get("ä¸")) + "is made of " + type.ToStr() + " Ingot, it can be used in many place in the industrial era.";
 			Color = MetalBlock.GetColor(type);
 		}
 
@@ -74,7 +74,7 @@ namespace Game
 		public Rod(Materials type, Color color) : this(type.ToString() + "Rod", null, color)
 		{
 			string name = type.ToStr();
-			DefaultDisplayName = name + Utils.Get("°ô");
+			DefaultDisplayName = name + Utils.Get("æ£’");
 			DefaultDescription = "Rods are made by forging " + char.ToLower(name[0], CultureInfo.CurrentCulture) + name.Substring(1) + " into shape. They are useful for making many things.";
 		}
 		public Rod(string name, string description, Color color) : base(description)
@@ -99,7 +99,7 @@ namespace Game
 		{
 			string name = type.ToStr();
 			Id = type.ToString() + "Sheet";
-			DefaultDisplayName = name + Utils.Get("Æ¬");
+			DefaultDisplayName = name + Utils.Get("ç‰‡");
 			DefaultDescription = "A sheet of pure " + name + ". Can be crafted into very durable and strong " + name + " items.";
 		}
 
@@ -123,7 +123,7 @@ namespace Game
 		public Plate(Materials type) : this(type.ToString() + "Plate", MetalBlock.GetColor(type))
 		{
 			string name = type.ToStr();
-			DefaultDisplayName = name + Utils.Get("°å");
+			DefaultDisplayName = name + Utils.Get("æ¿");
 			DefaultDescription = "A plate of pure " + name + ". Can be crafted into very durable and strong " + name + " items. Very important in the industrial era.";
 		}
 
@@ -132,7 +132,7 @@ namespace Game
 			BlocksManager.DrawMeshBlock(primitivesRenderer, m_standaloneBlockMesh, Color, size * 1.5f, ref matrix, environmentData);
 		}
 
-		public override void GenerateTerrainVertices(Block block, BlockGeometryGenerator generator, TerrainGeometrySubsets geometry, int value, int x, int y, int z)
+		public override void GenerateTerrainVertices(Block block, BlockGeometryGenerator generator, TerrainGeometry geometry, int value, int x, int y, int z)
 		{
 			generator.GenerateMeshVertices(block, x, y, z, m_standaloneBlockMesh, Color, null, geometry.SubsetOpaque);
 		}
@@ -146,7 +146,7 @@ namespace Game
 	}
 	public class RefractoryBrick : MeshItem
 	{
-		public RefractoryBrick() : base(Utils.Get("ÄÍ»ğ×©ÊÇÒ»ÖÖÄÍ»ğÌÕ´É²ÄÁÏ£¬ÓÃÓÚÂ¯³ÄÂ¯£¬Ò¤Â¯£¬¸ß¼¶È¼ÉÕÊÒºÍ±ÚÂ¯¡£ Ëü¾ßÓĞÄÍ¸ßÎÂĞÔÄÜ£¬µ«µ¼ÈÈÏµÊıµÍ£¬ÄÜĞ§¸ß¡£"))
+		public RefractoryBrick() : base(Utils.Get("è€ç«ç –æ˜¯ä¸€ç§è€ç«é™¶ç“·ææ–™ï¼Œç”¨äºç‚‰è¡¬ç‚‰ï¼Œçª‘ç‚‰ï¼Œé«˜çº§ç‡ƒçƒ§å®¤å’Œå£ç‚‰ã€‚ å®ƒå…·æœ‰è€é«˜æ¸©æ€§èƒ½ï¼Œä½†å¯¼çƒ­ç³»æ•°ä½ï¼Œèƒ½æ•ˆé«˜ã€‚"))
 		{
 			m_standaloneBlockMesh.AppendMesh("Models/Brick", "Brick", Matrix.CreateTranslation(0f, -.02f, 0f) * 1.4f, Matrix.CreateTranslation(-32 % 16 / 16f, -32 / 16 / 16f, 0f), new Color(255, 153, 18));
 		}

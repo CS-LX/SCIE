@@ -28,7 +28,7 @@ namespace Game
 			{
 				Jint.Engine engine = JsEngine.Execute(code);
 				if (ComponentPlayer != null)
-					ComponentPlayer.ComponentGui.DisplaySmallMessage(engine.GetCompletionValue().ToString(), false, false);
+					ComponentPlayer.ComponentGui.DisplaySmallMessage(engine.GetCompletionValue().ToString(), Color.White, false, false);
 			}
 			catch (Exception e)
 			{
@@ -46,7 +46,7 @@ namespace Game
 		{
 			ComponentPlayer = componentMiner.ComponentPlayer;
 			if (!Powered || ComponentPlayer == null) return false;
-			DialogsManager.ShowDialog(ComponentPlayer.View.GameWidget, new TextBoxDialog("Enter Code", lastcode, int.MaxValue, Execute));
+			DialogsManager.ShowDialog(ComponentPlayer.GameWidget, new TextBoxDialog("Enter Code", lastcode, int.MaxValue, Execute));
 			return true;
 		}
 	}
@@ -64,7 +64,7 @@ namespace Game
 			m_collisionBoxes = new BoundingBox[] { m_standaloneBlockMesh.CalculateBoundingBox() };
 			Id = id;
 		}
-		public override void GenerateTerrainVertices(Block block, BlockGeometryGenerator generator, TerrainGeometrySubsets geometry, int value, int x, int y, int z)
+		public override void GenerateTerrainVertices(Block block, BlockGeometryGenerator generator, TerrainGeometry geometry, int value, int x, int y, int z)
 		{
 			generator.GenerateMeshVertices(block, x, y, z, m_standaloneBlockMesh, SubsystemPalette.GetColor(generator, PaintableItemBlock.GetColor(Terrain.ExtractData(value))), null, geometry.SubsetOpaque);
 			WireDevice.GenerateWireVertices(generator, value, x, y, z, 4, 0f, Vector2.Zero, geometry.SubsetOpaque);

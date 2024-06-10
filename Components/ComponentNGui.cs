@@ -16,20 +16,20 @@ namespace Game
 
 		public new void HandleInput()
 		{
-			WidgetInput input = m_componentPlayer.View.Input;
+			WidgetInput input = m_componentPlayer.ViewWidget.Input;
 			PlayerInput playerInput = m_componentPlayer.ComponentInput.PlayerInput;
 			ComponentRider componentRider = m_componentPlayer.ComponentRider;
-			if (m_componentPlayer.View.ActiveCamera.IsEntityControlEnabled)
+			if (m_componentPlayer.GameWidget.ActiveCamera.IsEntityControlEnabled)
 			{
 				if (!m_keyboardHelpMessageShown && (m_componentPlayer.PlayerData.InputDevice & WidgetInputDevice.Keyboard) != 0 && Time.PeriodicEvent(7.0, 0.0))
 				{
 					m_keyboardHelpMessageShown = true;
-					DisplaySmallMessage(Utils.Get("°´ H ¼ü²é¿´¼üÅÌ¿ØÖÆ°ïÖú\n(»ò¿´°ïÖú)"), true, true);
+					DisplaySmallMessage(Utils.Get("æŒ‰ H é”®æŸ¥çœ‹é”®ç›˜æ§åˆ¶å¸®åŠ©\n(æˆ–çœ‹å¸®åŠ©)"), Color.White, true, true);
 				}
 				else if (!m_gamepadHelpMessageShown && (m_componentPlayer.PlayerData.InputDevice & WidgetInputDevice.Gamepads) != 0 && Time.PeriodicEvent(7.0, 0.0))
 				{
 					m_gamepadHelpMessageShown = true;
-					DisplaySmallMessage(Utils.Get("°´ START/PAUSE ¼ü²é¿´ÊÖ±ú¿ØÖÆ°ïÖú\n(»ò¿´°ïÖú)"), true, true);
+					DisplaySmallMessage(Utils.Get("æŒ‰ START/PAUSE é”®æŸ¥çœ‹æ‰‹æŸ„æ§åˆ¶å¸®åŠ©\n(æˆ–çœ‹å¸®åŠ©)"), Color.White,true, true);
 				}
 			}
 			if (playerInput.KeyboardHelp)
@@ -39,7 +39,7 @@ namespace Game
 				if (m_keyboardHelpDialog.ParentWidget != null)
 					DialogsManager.HideDialog(m_keyboardHelpDialog);
 				else
-					DialogsManager.ShowDialog(m_componentPlayer.View.GameWidget, m_keyboardHelpDialog);
+					DialogsManager.ShowDialog(m_componentPlayer.GameWidget, m_keyboardHelpDialog);
 			}
 			if (playerInput.GamepadHelp)
 			{
@@ -48,7 +48,7 @@ namespace Game
 				if (m_gamepadHelpDialog.ParentWidget != null)
 					DialogsManager.HideDialog(m_gamepadHelpDialog);
 				else
-					DialogsManager.ShowDialog(m_componentPlayer.View.GameWidget, m_gamepadHelpDialog);
+					DialogsManager.ShowDialog(m_componentPlayer.GameWidget, m_gamepadHelpDialog);
 			}
 			if (m_helpButtonWidget.IsClicked)
 				ScreensManager.SwitchScreen("Help");
@@ -81,7 +81,7 @@ namespace Game
 				m_componentPlayer.ComponentBody.IsSneaking = !isSneaking;
 				if (m_componentPlayer.ComponentBody.IsSneaking != isSneaking)
 				{
-					DisplaySmallMessage(Utils.Get(m_componentPlayer.ComponentBody.IsSneaking ? "Ç±ĞĞÄ£Ê½£º¿ª" : "Ç±ĞĞÄ£Ê½£º¹Ø"), false, false);
+					DisplaySmallMessage(Utils.Get(m_componentPlayer.ComponentBody.IsSneaking ? "æ½œè¡Œæ¨¡å¼ï¼šå¼€" : "æ½œè¡Œæ¨¡å¼ï¼šå…³"),Color.White, false, false);
 				}
 			}
 			if (componentRider != null && (m_mountButtonWidget.IsClicked || playerInput.ToggleMount))
@@ -97,15 +97,15 @@ namespace Game
 				}
 				if (componentRider.Mount != null != flag)
 				{
-					DisplaySmallMessage(Utils.Get(componentRider.Mount != null ? "ÉÏÂí" : "ÏÂÂí"), false, false);
+					DisplaySmallMessage(Utils.Get(componentRider.Mount != null ? "ä¸Šé©¬" : "ä¸‹é©¬"), Color.White, false, false);
 				}
 			}
-			if ((m_editItemButton.IsClicked || playerInput.EditItem) && m_nearbyEditableCell.HasValue)
+			if ((m_editItemButton.IsClicked || playerInput.EditItem) && m_componentPlayer.ComponentBlockHighlight.NearbyEditableCell.HasValue)
 			{
-				int cellValue = m_subsystemTerrain.Terrain.GetCellValue(m_nearbyEditableCell.Value.X, m_nearbyEditableCell.Value.Y, m_nearbyEditableCell.Value.Z);
+				int cellValue = m_subsystemTerrain.Terrain.GetCellValue(m_componentPlayer.ComponentBlockHighlight.NearbyEditableCell.Value.X, m_componentPlayer.ComponentBlockHighlight.NearbyEditableCell.Value.Y, m_componentPlayer.ComponentBlockHighlight.NearbyEditableCell.Value.Z);
 				int contents = Terrain.ExtractContents(cellValue);
 				SubsystemBlockBehavior[] blockBehaviors = m_subsystemBlockBehaviors.GetBlockBehaviors(contents);
-				for (int i = 0; i < blockBehaviors.Length && !blockBehaviors[i].OnEditBlock(m_nearbyEditableCell.Value.X, m_nearbyEditableCell.Value.Y, m_nearbyEditableCell.Value.Z, cellValue, m_componentPlayer); i++)
+				for (int i = 0; i < blockBehaviors.Length && !blockBehaviors[i].OnEditBlock(m_componentPlayer.ComponentBlockHighlight.NearbyEditableCell.Value.X, m_componentPlayer.ComponentBlockHighlight.NearbyEditableCell.Value.Y, m_componentPlayer.ComponentBlockHighlight.NearbyEditableCell.Value.Z, cellValue, m_componentPlayer); i++)
 				{
 				}
 			}
@@ -134,63 +134,67 @@ namespace Game
 					if (m_componentPlayer.ComponentLocomotion.IsCreativeFlyEnabled)
 					{
 						m_componentPlayer.ComponentLocomotion.JumpOrder = 1f;
-						DisplaySmallMessage(Utils.Get("·ÉĞĞÄ£Ê½£º¿ª"), false, false);
+						DisplaySmallMessage(Utils.Get("é£è¡Œæ¨¡å¼ï¼šå¼€"),Color.White, false, false);
 					}
 					else
-						DisplaySmallMessage(Utils.Get("·ÉĞĞÄ£Ê½£º¹Ø"), false, false);
+						DisplaySmallMessage(Utils.Get("é£è¡Œæ¨¡å¼ï¼šå…³"),Color.White, false, false);
 				}
 			}
 			if (m_cameraButtonWidget.IsClicked || playerInput.SwitchCameraMode)
 			{
-				View view = m_componentPlayer.View;
-				if (view.ActiveCamera.GetType() == typeof(FppCamera))
+                GameWidget gameWidget = m_componentPlayer.GameWidget;
+				if (gameWidget.ActiveCamera.GetType() == typeof(FppCamera))
 				{
-					view.ActiveCamera = view.FindCamera<TppCamera>(true);
-					DisplaySmallMessage(Utils.Get("µÚÈıÈË³ÆÊÓ½Ç"), false, false);
+                    gameWidget.ActiveCamera = gameWidget.FindCamera<TppCamera>(true);
+					DisplaySmallMessage(Utils.Get("ç¬¬ä¸‰äººç§°è§†è§’"),Color.White, false, false);
 				}
-				else if (view.ActiveCamera.GetType() == typeof(TppCamera))
+				else if (gameWidget.ActiveCamera.GetType() == typeof(TppCamera))
 				{
-					view.ActiveCamera = view.FindCamera<OrbitCamera>(true);
-					DisplaySmallMessage(Utils.Get("»¬¹ìÊÓ½Ç"), false, false);
+                    gameWidget.ActiveCamera = gameWidget.FindCamera<OrbitCamera>(true);
+					DisplaySmallMessage(Utils.Get("æ»‘è½¨è§†è§’"),Color.White, false, false);
 				}
-				else if (view.ActiveCamera.GetType() == typeof(OrbitCamera))
+				else if (gameWidget.ActiveCamera.GetType() == typeof(OrbitCamera))
 				{
-					view.ActiveCamera = isCreative ? (Camera)new DebugCamera(view) : view.FindCamera<FixedCamera>(true);
-					DisplaySmallMessage(Utils.Get(isCreative ? "µ÷ÊÔÊÓ½Ç" : "¹Ì¶¨ÊÓ½Ç"), false, false);
+                    gameWidget.ActiveCamera = isCreative ? (Camera)new DebugCamera(gameWidget) : gameWidget.FindCamera<FixedCamera>(true);
+					DisplaySmallMessage(Utils.Get(isCreative ? "è°ƒè¯•è§†è§’" : "å›ºå®šè§†è§’"),Color.White, false, false);
 				}
-				else if (isCreative && view.ActiveCamera.GetType() == typeof(FixedCamera))
+				else if (isCreative && gameWidget.ActiveCamera.GetType() == typeof(FixedCamera))
 				{
-					view.ActiveCamera = new FlyCamera(view);
-					DisplaySmallMessage(Utils.Get("·ÉĞĞÊÓ½Ç"), false, false);
+                    gameWidget.ActiveCamera = new FlyCamera(gameWidget);
+					DisplaySmallMessage(Utils.Get("é£è¡Œè§†è§’"),Color.White, false, false);
 				}
-				else if (view.ActiveCamera.GetType() == typeof(DebugCamera))
+				else if (gameWidget.ActiveCamera.GetType() == typeof(DebugCamera))
 				{
-					view.ActiveCamera = view.FindCamera<FixedCamera>(true);
-					DisplaySmallMessage(Utils.Get("¹Ì¶¨ÊÓ½Ç"), false, false);
+                    gameWidget.ActiveCamera = gameWidget.FindCamera<FixedCamera>(true);
+					DisplaySmallMessage(Utils.Get("å›ºå®šè§†è§’"),Color.White, false, false);
 				}
-				else if (view.ActiveCamera.GetType() == typeof(FlyCamera))
+				else if (gameWidget.ActiveCamera.GetType() == typeof(FlyCamera))
 				{
-					view.ActiveCamera = new RandomJumpCamera(view);
-					DisplaySmallMessage(Utils.Get("Ëæ»úÌøÔ¾ÊÓ½Ç"), false, false);
+                    gameWidget.ActiveCamera = new RandomJumpCamera(gameWidget);
+					DisplaySmallMessage(Utils.Get("éšæœºè·³è·ƒè§†è§’"),Color.White, false, false);
 				}
-				else if (view.ActiveCamera.GetType() == typeof(RandomJumpCamera))
+				else if (gameWidget.ActiveCamera.GetType() == typeof(RandomJumpCamera))
 				{
-					view.ActiveCamera = new StraightFlightCamera(view);
-					DisplaySmallMessage(Utils.Get("´¹Ö±·ÉĞĞÊÓ½Ç"), false, false);
+                    gameWidget.ActiveCamera = new StraightFlightCamera(gameWidget);
+					DisplaySmallMessage(Utils.Get("å‚ç›´é£è¡Œè§†è§’"),Color.White, false, false);
 				}
 				else
 				{
-					view.ActiveCamera = view.FindCamera<FppCamera>(true);
-					DisplaySmallMessage(Utils.Get("µÚÒ»ÈË³ÆÊÓ½Ç"), false, false);
+                    gameWidget.ActiveCamera = gameWidget.FindCamera<FppCamera>(true);
+					DisplaySmallMessage(Utils.Get("ç¬¬ä¸€äººç§°è§†è§’"),Color.White, false, false);
 				}
 			}
 			if (m_photoButtonWidget.IsClicked || playerInput.TakeScreenshot)
 			{
-				ScreenCaptureManager.CapturePhoto();
-				Time.QueueFrameCountDelayedExecution(Time.FrameIndex + 1, delegate
-				{
-					DisplaySmallMessage(Utils.Get("ÕÕÆ¬ÒÑ±£´æµ½Í¼Æ¬Ïà²á"), false, false);
-				});
+				ScreenCaptureManager.CapturePhoto(
+                    () => {
+                        Time.QueueFrameCountDelayedExecution(Time.FrameIndex + 1, delegate
+                        {
+                            DisplaySmallMessage(Utils.Get("ç…§ç‰‡å·²ä¿å­˜åˆ°å›¾ç‰‡ç›¸å†Œ"), Color.White,false, false);
+                        });
+                    },
+                    Log.Error
+                );
 			}
 			if (isCreative && (m_lightningButtonWidget.IsClicked || playerInput.Lighting))
 			{
@@ -210,22 +214,22 @@ namespace Game
 				if (num6 == num10)
 				{
 					m_subsystemTimeOfDay.TimeOfDayOffset += num6;
-					DisplaySmallMessage(Utils.Get("ÀèÃ÷"), false, false);
+					DisplaySmallMessage(Utils.Get("é»æ˜"),Color.White, false, false);
 				}
 				else if (num7 == num10)
 				{
 					m_subsystemTimeOfDay.TimeOfDayOffset += num7;
-					DisplaySmallMessage(Utils.Get("ÖĞÎç"), false, false);
+					DisplaySmallMessage(Utils.Get("ä¸­åˆ"), Color.White, false, false);
 				}
 				else if (num8 == num10)
 				{
 					m_subsystemTimeOfDay.TimeOfDayOffset += num8;
-					DisplaySmallMessage(Utils.Get("»Æ»è"), false, false);
+					DisplaySmallMessage(Utils.Get("é»„æ˜"), Color.White, false, false);
 				}
 				else if (num9 == num10)
 				{
 					m_subsystemTimeOfDay.TimeOfDayOffset += num9;
-					DisplaySmallMessage(Utils.Get("ÎçÒ¹"), false, false);
+					DisplaySmallMessage(Utils.Get("åˆå¤œ"), Color.White, false, false);
 				}
 			}
 			if (ModalPanelWidget != null)
@@ -234,7 +238,7 @@ namespace Game
 					ModalPanelWidget = null;
 			}
 			else if (input.Back || m_backButtonWidget.IsClicked)
-				DialogsManager.ShowDialog(m_componentPlayer.View.GameWidget, new GameMenuDialog(m_componentPlayer));
+				DialogsManager.ShowDialog(m_componentPlayer.GameWidget, new GameMenuDialog(m_componentPlayer));
 			return;
 		}
 
@@ -284,7 +288,7 @@ namespace Game
 			var componentChest = entity.FindComponent<ComponentChest>();
 			if (componentTrain != null)
 				return componentChest != null
-					? new NewChestWidget(inventory, componentChest, Utils.Get(componentTrain.ParentBody != null ? "³µÏá£¨ÒÑÁ¬½Ó£©" : "³µÏá"))
+					? new NewChestWidget(inventory, componentChest, Utils.Get(componentTrain.ParentBody != null ? "è½¦å¢ï¼ˆå·²è¿æ¥ï¼‰" : "è½¦å¢"))
 					: (Widget)new StoveWidget(inventory, componentTrain.ComponentEngine, "Widgets/TrainWidget");
 			var componentEngine = entity.FindComponent<ComponentEngine>();
 			if (componentEngine != null)
