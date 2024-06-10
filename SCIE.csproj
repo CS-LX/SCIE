@@ -21,25 +21,25 @@
 		<PlatformTarget>AnyCPU</PlatformTarget>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-		<OutputPath>bin\Debug\</OutputPath>
+		<OutputPath>D:\CS Project\SCIE\SCIE\</OutputPath>
 		<DebugSymbols>true</DebugSymbols>
 		<DebugType>full</DebugType>
 		<Optimize>false</Optimize>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-		<OutputPath>bin\Release\</OutputPath>
+		<OutputPath>D:\CS Project\SCIE\SCIE\</OutputPath>
 		<DebugSymbols>true</DebugSymbols>
 		<DebugType>pdbonly</DebugType>
 		<Optimize>true</Optimize>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-		<OutputPath>D:\Survivalcraft\Mods\工业mod\</OutputPath>
+		<OutputPath>D:\CS Project\SCIE\SCIE\bin\</OutputPath>
 		<LangVersion>latest</LangVersion>
 		<DefineConstants>DEBUG</DefineConstants>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
 		<LangVersion>7.1</LangVersion>
-		<OutputPath>D:\Survivalcraft\Mods\工业mod\</OutputPath>
+		<OutputPath>D:\CS Project\SCIE\SCIE\bin\</OutputPath>
 	</PropertyGroup>
 	<ItemGroup>
 		<Compile Include="Chemistry\ChemicalBlock.cs"/>
@@ -157,43 +157,259 @@
 	<ItemGroup>
 	  <Reference Include="Engine">
 	    <HintPath>references\Engine.dll</HintPath>
+	    <Private>False</Private>
 	  </Reference>
 	  <Reference Include="EntitySystem">
 	    <HintPath>references\EntitySystem.dll</HintPath>
+	    <Private>False</Private>
 	  </Reference>
 	  <Reference Include="Esprima">
 	    <HintPath>references\Esprima.dll</HintPath>
+	    <Private>False</Private>
 	  </Reference>
 	  <Reference Include="Jint">
 	    <HintPath>references\Jint.dll</HintPath>
+	    <Private>False</Private>
 	  </Reference>
 	  <Reference Include="NAudio.Core">
 	    <HintPath>references\NAudio.Core.dll</HintPath>
+	    <Private>False</Private>
 	  </Reference>
 	  <Reference Include="NAudio.Flac">
 	    <HintPath>references\NAudio.Flac.dll</HintPath>
+	    <Private>False</Private>
 	  </Reference>
 	  <Reference Include="NLayer">
 	    <HintPath>references\NLayer.dll</HintPath>
+	    <Private>False</Private>
 	  </Reference>
 	  <Reference Include="NLayer.NAudioSupport">
 	    <HintPath>references\NLayer.NAudioSupport.dll</HintPath>
+	    <Private>False</Private>
 	  </Reference>
 	  <Reference Include="NVorbis">
 	    <HintPath>references\NVorbis.dll</HintPath>
+	    <Private>False</Private>
 	  </Reference>
 	  <Reference Include="OpenTK">
 	    <HintPath>references\OpenTK.dll</HintPath>
+	    <Private>False</Private>
 	  </Reference>
 	  <Reference Include="SixLabors.ImageSharp">
 	    <HintPath>references\SixLabors.ImageSharp.dll</HintPath>
+	    <Private>False</Private>
 	  </Reference>
 	  <Reference Include="Survivalcraft">
 	    <HintPath>references\Survivalcraft.dll</HintPath>
+	    <Private>False</Private>
 	  </Reference>
 	  <Reference Include="TextCopy">
 	    <HintPath>references\TextCopy.dll</HintPath>
+	    <Private>False</Private>
 	  </Reference>
+	</ItemGroup>
+	<ItemGroup>
+	  <None Update="IndustrialEquations.txt">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="IndustrialMod.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Items.csv">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="工业mod.xdb">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="工业mod1.1暴力进化.xdb">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="科学的燃烧温度.csv">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="面粉煤矿可爆.csv">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Audio\SteamEngine.ogg">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Models\Airship.dae">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Models\Cylinder.dae">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Models\Gear.dae">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Models\GearMould.dae">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Models\Ingots.dae">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Models\JellyFish.dae">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Models\Minecart.dae">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Models\Nuclearbomb.dae">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Models\Piston.dae">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Models\Rods.dae">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Models\Screwdriver.dae">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Models\Shield.dae">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Models\SteamBoat.dae">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Models\Train.dae">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Models\Wheel.dae">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Models\WheelMould.dae">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Models\Wrench.dae">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Screens\RecipaediaRecipesScreen.xml">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Textures\Clothing\DivingHelmet.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Textures\Clothing\SteelBoots.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Textures\Clothing\SteelChainMail.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Textures\Clothing\SteelChestPlate.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Textures\Clothing\SteelHelmet.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Textures\Clothing\SteelLeggings.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Textures\Blocks.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Textures\JellyFish.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Textures\SteamBoat.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Textures\Train.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Widgets\BlastFurnaceWidget.xml">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Widgets\CanpackWidget.xml">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Widgets\CastMachWidget.xml">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Widgets\CovenWidget.xml">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Widgets\CraftingRecipe.xml">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Widgets\CraftingRecipeSlot.xml">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Widgets\CReactorWidget.xml">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Widgets\DrillerWidget.xml">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Widgets\ElectricFurnaceWidget.xml">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Widgets\ElectrobathWidget.xml">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Widgets\Engine2Widget.xml">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Widgets\EngineAWidget.xml">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Widgets\EngineHWidget.xml">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Widgets\EngineWidget.xml">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Widgets\FireBoxWidget.xml">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Widgets\FractionalTowerWidget.xml">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Widgets\FurnaceNWidget.xml">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Widgets\HearthFurnaceWidget.xml">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Widgets\KibblerWidget.xml">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Widgets\LiquidPumpWidget.xml">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Widgets\MachineToolWidget.xml">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Widgets\MagnetizerWidget.xml">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Widgets\Musket2Widget.xml">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Widgets\NewChestWidget.xml">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Widgets\PresserNNWidget.xml">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Widgets\PresserWidget.xml">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Widgets\SeperatorWidget.xml">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Widgets\SmeltingRecipe.xml">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Widgets\SqueezerWidget.xml">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Widgets\TrainWidget.xml">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="modinfo.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
 	</ItemGroup>
 	<PropertyGroup>
 	</PropertyGroup>

@@ -27,8 +27,8 @@ namespace Game
 			try
 			{
 				Jint.Engine engine = JsEngine.Execute(code);
-				if (ComponentPlayer != null)
-					ComponentPlayer.ComponentGui.DisplaySmallMessage(engine.GetCompletionValue().ToString(), Color.White, false, false);
+                if (ComponentPlayer != null) { }
+                //ComponentPlayer.ComponentGui.DisplaySmallMessage(engine.GetCompletionValue().ToString(), Color.White, false, false);
 			}
 			catch (Exception e)
 			{

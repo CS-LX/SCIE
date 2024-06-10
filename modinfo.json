@@ -1,0 +1,11 @@
+{
+  "Name": "IndustrialEra 工业时代",
+  "Version": "1.0",
+  "ApiVersion": "1.60",
+  "Description": "",
+  "ScVersion": "2.3.0.0",
+  "Link": "https://github.com/CS-LX/SCIE",
+  "Author": "pew无知的人, 钅离_LX",
+  "PackageName": "pew.SCIE",
+  "Dependencies": []
+}
