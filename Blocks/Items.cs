@@ -14,16 +14,8 @@ namespace Game
 				Task = Task.Run((Action)Load);
 			TexturedMeshItem.WhiteTexture = new Texture2D(1, 1, 1, ColorFormat.Rgba8888);
 			TexturedMeshItem.WhiteTexture.SetData(0, new byte[] { 255, 255, 255, 255 });
-			var stream = Utils.GetTargetFile("IndustrialMod.png");
-			try
-			{
-				Texture = Texture2D.Load(stream);
-			}
-			finally
-			{
-				stream.Close();
-			}
-		}
+            Texture = ContentManager.Get<Texture2D>("IndustrialMod");
+        }
 
 		internal static void Load()
 		{

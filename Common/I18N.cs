@@ -83,7 +83,7 @@ namespace Game
 			"Fe-Al-Cr合金",
 			"塑料",
 		};
-		public static Dictionary<string, string> TR;
+		public static Dictionary<string, string> TR = new();
 		/// <summary>
 		/// 读取键值对文件
 		/// </summary>
